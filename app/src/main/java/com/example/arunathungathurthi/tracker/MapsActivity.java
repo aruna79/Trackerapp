@@ -4,6 +4,8 @@ package com.example.arunathungathurthi.tracker;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +23,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -59,13 +66,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
                 Log.d("Location: ", location.toString());
-
+                mMap.clear();
 
                 LatLng newLocation = new LatLng(location.getLatitude(),location.getLongitude());
                 //LatLng sydney = new LatLng(-34, 151);
                 mMap.addMarker(new MarkerOptions().position(newLocation).title("Marker in newLocation"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(newLocation));
 
+
+                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+                try {
+                    List<Address> addresslist = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                    if(addresslist!= null && addresslist.size() > 0){
+                        Log.d("Address: ", addresslist.get(0).toString());
+                        Toast.makeText(MapsActivity.this,addresslist.get(0).getAddressLine(0), Toast.LENGTH_LONG).show();
+
+                    }
+                    else{
+                        Log.d("Address:", "Cpuldn't find the address");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
