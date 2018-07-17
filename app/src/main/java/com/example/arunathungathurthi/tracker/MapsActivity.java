@@ -48,10 +48,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
 
                 double lat = Double.parseDouble(td.get("lat").toString());
-                double lag = Double.parseDouble(td.get("lag").toString());
+                double lag = Double.parseDouble(td.get("lon").toString());
                 /** Make sure that the map has been initialised **/
                 sydney = new LatLng(lat, lag);
-                LastDateOnline= td.get("LastOnlineDate").toString();
+                LastDateOnline= td.get("lastOnlineDate").toString();
                 LoadMap();
 
             }
