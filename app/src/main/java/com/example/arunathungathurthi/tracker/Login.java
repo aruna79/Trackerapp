@@ -21,9 +21,7 @@ public class Login extends AppCompatActivity {
         GlobalInfo.PhoneNumber = GlobalInfo.FormatPhoneNumber(EditNumber.getText().toString());
         GlobalInfo.UpdatesInfo(GlobalInfo.PhoneNumber);
         finish();
-        setContentView(R.layout.activity_home);
-//        Intent intent=new Intent(this, MyTrackers.class);
-//        startActivity(intent);
-//    }
+        Intent intent=new Intent(this, MyTrackers.class);
+        startActivity(intent);
     }
-}
+    }

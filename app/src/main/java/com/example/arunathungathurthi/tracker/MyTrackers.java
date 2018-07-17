@@ -166,7 +166,7 @@ public class MyTrackers extends AppCompatActivity {
                         GlobalInfo.MyTrackers.put(cNumber, name);
                         DatabaseReference Database = FirebaseDatabase.getInstance().getReference();
 
-                        Database.child("Users").child(cNumber).child("Finders").child(GlobalInfo.PhoneNumber).setValue(true);
+                        Database.child("Users").child(GlobalInfo.PhoneNumber).child("Finders").child(cNumber).setValue(true);
                         GlobalInfo globalInfo = new GlobalInfo(this);
                         globalInfo.SaveData();
 
