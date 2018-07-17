@@ -8,19 +8,22 @@ import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
     EditText EditNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        EditNumber=(EditText)findViewById(R.id.EditNumber);
+        EditNumber = (EditText) findViewById(R.id.EditNumber);
     }
 
     public void BuNext(View view) {
 
-        GlobalInfo.PhoneNumber=GlobalInfo.FormatPhoneNumber(EditNumber.getText().toString());
+        GlobalInfo.PhoneNumber = GlobalInfo.FormatPhoneNumber(EditNumber.getText().toString());
         GlobalInfo.UpdatesInfo(GlobalInfo.PhoneNumber);
         finish();
-        Intent intent=new Intent(this, MyTrackers.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_home);
+//        Intent intent=new Intent(this, MyTrackers.class);
+//        startActivity(intent);
+//    }
     }
 }

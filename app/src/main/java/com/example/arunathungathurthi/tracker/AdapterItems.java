@@ -1,14 +1,13 @@
 package com.example.arunathungathurthi.tracker;
 
-public class AdapterListItems {
+public class AdapterItems {
+
+    public  String UserName;
     public String PhoneNumber;
-    public String UserName;
 
-    AdapterListItems(String UserName, String PhoneNumber){
-        this.UserName = UserName;
-        this.PhoneNumber = PhoneNumber;
+    AdapterItems(String UserName, String PhoneNumber)
+    {
+        this.UserName=UserName;
+        this.PhoneNumber=PhoneNumber;
     }
-
-
-
 }

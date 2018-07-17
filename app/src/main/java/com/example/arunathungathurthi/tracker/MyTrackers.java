@@ -29,51 +29,47 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Trackers extends AppCompatActivity {
-    ArrayList<AdapterListItems> listnewData = new ArrayList<AdapterListItems>();
-    CustomAdapter myAdapter;
+
+
+public class MyTrackers extends AppCompatActivity {
+    ArrayList<AdapterItems> listnewsData = new ArrayList<AdapterItems>();
+    MyCustomAdapter myadapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracker);
-        listnewData.add(new AdapterListItems("Aruna","4257708280"));
-        myAdapter=new CustomAdapter(listnewData);
-        ListView lv=(ListView)findViewById(R.id.listView);
-        lv.setAdapter(myAdapter);
-        //Refresh();
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        setContentView(R.layout.activity_my_trackers);
+      // listnewsData.add(new AdapterItems("Aruna","4257708280"));
+        myadapter = new MyCustomAdapter(listnewsData);
+        ListView lsNews = (ListView) findViewById(R.id.listView);
+        lsNews.setAdapter(myadapter);//intial with data
+        Refresh();
+        lsNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GlobalInfo.Trackers.remove(listnewData.get(position).PhoneNumber);
-                DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Users").child(listnewData.get(position).PhoneNumber).child("Finders")
-                        .child(GlobalInfo.PhoneNumber).removeValue();
-                GlobalInfo globalInfo= new GlobalInfo(getApplicationContext());
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                GlobalInfo.MyTrackers.remove(listnewsData.get(position).PhoneNumber);
+                DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                database.child("Users").child(listnewsData.get(position).PhoneNumber).child("Finders").child(GlobalInfo.PhoneNumber).removeValue();
+                GlobalInfo globalInfo = new GlobalInfo(getApplicationContext());
                 globalInfo.SaveData();
-                //Refresh();
-
-
+                Refresh();
             }
         });
     }
 
-    void Refresh(){
-        listnewData.clear();
-        for (Map.Entry  m:GlobalInfo.Trackers.entrySet()){
-            listnewData.add(new AdapterListItems(  m.getValue().toString() , m.getKey().toString()));
+    void Refresh() {
+        for (Map.Entry m : GlobalInfo.MyTrackers.entrySet()) {
+            listnewsData.add(new AdapterItems(m.getValue().toString(), m.getKey().toString()));
         }
-        myAdapter.notifyDataSetChanged();
+        myadapter.notifyDataSetChanged();
     }
-
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_contact, menu);
+
+
         return true;
     }
 
@@ -81,38 +77,37 @@ public class Trackers extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-
-            case R.id.add:
-                CheckUserPermissions();
-
-                return true;
-            case R.id.goback:
-                GlobalInfo globalInfo= new GlobalInfo(this);
+            case R.id.done:
+                GlobalInfo globalInfo = new GlobalInfo(this);
                 globalInfo.SaveData();
-                finish();
+
+              finish();
                 return true;
+            case R.id.add:
+                CheckUserPermsions();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    void CheckUserPermissions(){
-        if ( Build.VERSION.SDK_INT >= 23){
+    void CheckUserPermsions() {
+        if (Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) !=
-                    PackageManager.PERMISSION_GRANTED  ){
+                    PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{
                                 Manifest.permission.READ_CONTACTS},
                         REQUEST_CODE_ASK_PERMISSIONS);
-                return ;
+                return;
             }
         }
 
-        PickContact();
+        PickContact();// init the contact list
 
     }
-    //get access to location permission
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
 
     @Override
@@ -120,10 +115,10 @@ public class Trackers extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CODE_ASK_PERMISSIONS:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    PickContact();
+                    PickContact();// init the contact list
                 } else {
                     // Permission Denied
-                    Toast.makeText( this,"your message" , Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "your message", Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
@@ -132,11 +127,14 @@ public class Trackers extends AppCompatActivity {
         }
     }
 
-    void PickContact(){
+    void PickContact() {
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(intent, PICK_CONTACT);
     }
-    static final int PICK_CONTACT=1;
+
+    // Declare
+    static final int PICK_CONTACT = 1;
+
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
@@ -165,14 +163,14 @@ public class Trackers extends AppCompatActivity {
                         }
                         String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                        GlobalInfo.Trackers.put(cNumber, name);
-                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                        mDatabase.child("Users").child(cNumber).child("Finders")
-                                .child(GlobalInfo.PhoneNumber).setValue(true);
-                        GlobalInfo globalInfo= new GlobalInfo(this);
+                        GlobalInfo.MyTrackers.put(cNumber, name);
+                        DatabaseReference Database = FirebaseDatabase.getInstance().getReference();
+
+                        Database.child("Users").child(cNumber).child("Finders").child(GlobalInfo.PhoneNumber).setValue(true);
+                        GlobalInfo globalInfo = new GlobalInfo(this);
                         globalInfo.SaveData();
 
-                        //Refresh();
+                        Refresh();
                         //update firebase and
                         //update list
                         //update database
@@ -182,41 +180,46 @@ public class Trackers extends AppCompatActivity {
         }
     }
 
+    private class MyCustomAdapter extends BaseAdapter {
+        public ArrayList<AdapterItems> listnewsDataAdpater;
 
-
-        private class CustomAdapter extends BaseAdapter{
-                    public ArrayList<AdapterListItems> listnewDataAdapter;
-                    public CustomAdapter(ArrayList<AdapterListItems> listnewDataAdapter){
-                        this.listnewDataAdapter=listnewDataAdapter;
-                    }
-
-                    @Override
-                    public int getCount() {
-                        return listnewDataAdapter.size();
-                    }
-
-                    @Override
-                    public Object getItem(int position) {
-                        return null;
-                    }
-
-                    @Override
-                    public long getItemId(int position) {
-                        return position;
-                    }
-
-                    @Override
-                    public View getView(int position, View convertview, ViewGroup parent) {
-                        LayoutInflater Inflater = getLayoutInflater();
-                        View myview = Inflater.inflate(R.layout.contact,null);
-                        final AdapterListItems items = listnewDataAdapter.get(position);
-                        TextView tv_user_name=(TextView)myview.findViewById(R.id.tv_user_name);
-                        tv_user_name.setText(items.UserName);
-                        TextView tv_phone =(TextView)myview.findViewById(R.id.tv_phone);
-                        tv_phone.setText(items.PhoneNumber);
-
-                        return myview;
-
-                    }
-                }
+        public MyCustomAdapter(ArrayList<AdapterItems> listnewsDataAdpater) {
+            this.listnewsDataAdpater = listnewsDataAdpater;
         }
+
+
+        @Override
+        public int getCount() {
+            return listnewsDataAdpater.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater mInflater = getLayoutInflater();
+
+            View myView = mInflater.inflate(R.layout.single_row_conact, null);
+
+            final AdapterItems s = listnewsDataAdpater.get(position);
+
+            TextView tv_user_name = (TextView) myView.findViewById(R.id.tv_user_name);
+            tv_user_name.setText(s.UserName);
+            TextView tv_phone = (TextView) myView.findViewById(R.id.tv_phone);
+            tv_phone.setText(s.PhoneNumber);
+
+            return myView;
+        }
+
+    }
+}
+
+
