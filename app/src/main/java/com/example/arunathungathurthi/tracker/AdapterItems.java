@@ -9,5 +9,6 @@ public class AdapterItems {
     {
         this.UserName=UserName;
         this.PhoneNumber=PhoneNumber;
+
     }
 }

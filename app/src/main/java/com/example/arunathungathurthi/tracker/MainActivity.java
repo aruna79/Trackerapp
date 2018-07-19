@@ -222,13 +222,27 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.help:
                     CheckUserPermission();
                     return true;
-                case R.id.addalert:
+                case R.id.action_logout:
+                    logout();
                     return true;
 
                 default:
                     return super.onOptionsItemSelected(item);
             }
         }
+
+    public void logout() {
+        GlobalInfo globalInfo = new GlobalInfo(this);
+
+        GlobalInfo.PhoneNumber=null;
+        finish();
+        globalInfo.ClearData();
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+
+
+
     private class MyCustomAdapter extends BaseAdapter {
         public ArrayList<AdapterItems> listnewsDataAdpater ;
 
@@ -280,5 +294,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    }
+}
+
+
 

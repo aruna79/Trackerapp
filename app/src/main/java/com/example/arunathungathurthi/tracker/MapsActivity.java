@@ -70,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
 
+
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value

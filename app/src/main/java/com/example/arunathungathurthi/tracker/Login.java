@@ -1,13 +1,19 @@
 package com.example.arunathungathurthi.tracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
     EditText EditNumber;
+    public static final String PREFS_NAME = "LoginPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +23,22 @@ public class Login extends AppCompatActivity {
     }
 
     public void BuNext(View view) {
-
+        GlobalInfo globalInfo= new GlobalInfo(this);
         GlobalInfo.PhoneNumber = GlobalInfo.FormatPhoneNumber(EditNumber.getText().toString());
         GlobalInfo.UpdatesInfo(GlobalInfo.PhoneNumber);
         finish();
-        Intent intent=new Intent(this, MyTrackers.class);
+        globalInfo.SaveData();
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
+
+
     }
+
+
+
+
+
+

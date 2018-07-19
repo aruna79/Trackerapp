@@ -14,7 +14,14 @@ tools:context="phonelocation.example.asuss550c.phonelocation.ContactList">
     app:showAsAction="always" />
     <item android:id="@+id/addalert"
         android:title="addalert"
-        android:onClick="addalert"
-        android:icon="@drawable/ic_perm_identity_white_24dp"
-        app:showAsAction="always" />
+
+
+        />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="logout"
+        app:showAsAction="ifRoom" />
+
+
 </menu>
