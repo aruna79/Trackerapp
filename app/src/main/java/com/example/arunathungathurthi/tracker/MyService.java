@@ -44,13 +44,13 @@ public class MyService extends IntentService{
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             Location location=TrackerLocation.location;
-            databaseReference.child("Users").child(GlobalInfo.PhoneNumber).child("Location").child("lat").setValue((TrackerLocation.location.getLatitude()));
+            databaseReference.child("Users").child(GlobalInfo.PhoneNumber).child("Location").child("lat").setValue(TrackerLocation.location.getLatitude());
 
-            databaseReference.child("Users").child(GlobalInfo.PhoneNumber).child("Location").child("lon").setValue((TrackerLocation.location.getLongitude()));
+            databaseReference.child("Users").child(GlobalInfo.PhoneNumber).child("Location").child("lon").setValue(TrackerLocation.location.getLongitude());
 
             DateFormat df = new SimpleDateFormat("YYYY/MM/DD HH:MM:SS");
             Date date=new Date();
-            databaseReference.child("Users").child(GlobalInfo.PhoneNumber).child("Location").child("lastOnlineDate").setValue((df.format(date).toString()));
+            databaseReference.child("Users").child(GlobalInfo.PhoneNumber).child("Location").child("lastOnlineDate").setValue(df.format(date).toString());
 
         }
 

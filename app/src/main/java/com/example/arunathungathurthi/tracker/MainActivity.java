@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 AdapterItems adapterItems=listnewsData.get(position);
+                GlobalInfo.UpdatesInfo(adapterItems.PhoneNumber);
                 Intent intent= new Intent(getApplicationContext(),MapsActivity.class);
                 intent.putExtra("PhoneNumber",adapterItems.PhoneNumber);
                 startActivity(intent);
@@ -220,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.help:
                     CheckUserPermission();
+                    return true;
+                case R.id.addalert:
                     return true;
 
                 default:

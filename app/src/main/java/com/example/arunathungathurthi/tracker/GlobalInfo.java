@@ -20,7 +20,7 @@ public class GlobalInfo {
     public  static Map<String,String> MyTrackers=new HashMap<>();
 
     public  static  void UpdatesInfo(String UserPhone){
-        DateFormat df= new SimpleDateFormat("yyyy/MM/dd HH:MM:ss");
+        DateFormat df= new SimpleDateFormat("yyyy/MM/DD HH:MM:SS");
         Date date= new Date();
         DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Users").child(UserPhone).

@@ -1,10 +1,15 @@
 package com.example.arunathungathurthi.tracker;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +30,7 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
     DatabaseReference databaseReference;
 
     @Override
@@ -34,24 +40,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle b=getIntent().getExtras();
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
+
         LoadLocation(b.getString("PhoneNumber"));
 
     }
 
-    void  LoadLocation(String PhoneNumber){
 
-        databaseReference.child("Users").child(PhoneNumber).
-                child("Location").addValueEventListener(new ValueEventListener() {
+
+
+   public void  LoadLocation(String PhoneNumber){
+
+
+        databaseReference.child("Users").child(PhoneNumber)
+                .child("Location").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
 
+                 if(td==null)return;
                 double lat = Double.parseDouble(td.get("lat").toString());
-                double lag = Double.parseDouble(td.get("lon").toString());
+                double lon = Double.parseDouble(td.get("lon").toString());
                 /** Make sure that the map has been initialised **/
-                sydney = new LatLng(lat, lag);
-                LastDateOnline= td.get("lastOnlineDate").toString();
+                sydney = new LatLng(lat, lon);
+                    LastDateOnline= td.get("lastOnlineDate").toString();
+
+
                 LoadMap();
 
             }
@@ -67,15 +81,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     void LoadMap(){
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     /**
      * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
+     * This callback is triggered when the map is ready to be used.x
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
      * we just add a marker near Sydney, Australia.
      * If Google Play services is not installed on the device, the user will be prompted to install
@@ -88,17 +105,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
+//        LatLng seattle = new LatLng()
         // Add a marker in Sydney and move the camera
 
-        mMap.addMarker(new MarkerOptions().position(sydney).title("last online:"+ LastDateOnline));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+
+        mMap.addMarker(new MarkerOptions().position(sydney).title("lastOnlineDate:" + LastDateOnline));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
     }
 
+        }
 
 
 
 
-}
+
+
 
 
 

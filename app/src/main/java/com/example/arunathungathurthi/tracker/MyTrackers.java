@@ -79,8 +79,7 @@ public class MyTrackers extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.done:
                 GlobalInfo globalInfo = new GlobalInfo(this);
-                globalInfo.SaveData();
-
+               globalInfo.SaveData();
               finish();
                 return true;
             case R.id.add:
@@ -157,9 +156,11 @@ public class MyTrackers extends AppCompatActivity {
                                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
                                     null, null);
-                            phones.moveToFirst();
+                           phones.moveToFirst();
                             cNumber = GlobalInfo.FormatPhoneNumber(phones.getString(phones.getColumnIndex("data1")));
-                            System.out.println("number is:" + cNumber);
+                           System.out.println("number is:" + cNumber);
+
+
                         }
                         String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
@@ -170,7 +171,7 @@ public class MyTrackers extends AppCompatActivity {
                         GlobalInfo globalInfo = new GlobalInfo(this);
                         globalInfo.SaveData();
 
-                        Refresh();
+//                        Refresh();
                         //update firebase and
                         //update list
                         //update database

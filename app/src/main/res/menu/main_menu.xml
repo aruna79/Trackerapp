@@ -12,4 +12,9 @@ tools:context="phonelocation.example.asuss550c.phonelocation.ContactList">
     android:title="addtracker"
     android:icon="@drawable/ic_perm_identity_white_24dp"
     app:showAsAction="always" />
+    <item android:id="@+id/addalert"
+        android:title="addalert"
+        android:onClick="addalert"
+        android:icon="@drawable/ic_perm_identity_white_24dp"
+        app:showAsAction="always" />
 </menu>
