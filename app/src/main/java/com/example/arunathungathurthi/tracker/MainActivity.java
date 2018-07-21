@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,11 +59,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
                 AdapterItems adapterItems=listnewsData.get(position);
                 GlobalInfo.UpdatesInfo(adapterItems.PhoneNumber);
                 Intent intent= new Intent(getApplicationContext(),MapsActivity.class);
                 intent.putExtra("PhoneNumber",adapterItems.PhoneNumber);
                 startActivity(intent);
+
             }
         });
 
@@ -225,6 +228,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_logout:
                     logout();
                     return true;
+                case R.id.addalert:
+                    Intent intent1 =new Intent(this,Alert.class);
+                    startActivity(intent1);
+
 
                 default:
                     return super.onOptionsItemSelected(item);

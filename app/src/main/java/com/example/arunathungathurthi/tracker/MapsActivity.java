@@ -43,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LoadLocation(b.getString("PhoneNumber"));
 
+
     }
 
 
@@ -63,12 +64,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double lon = Double.parseDouble(td.get("lon").toString());
                 /** Make sure that the map has been initialised **/
                 sydney = new LatLng(lat, lon);
-                    LastDateOnline= td.get("lastOnlineDate").toString();
+
+                LastDateOnline= td.get("lastOnlineDate").toString();
 
 
                 LoadMap();
+                LoadAlert();
 
             }
+            void LoadAlert(){
+
+
+            }
+
+
+
 
 
             @Override
@@ -79,6 +89,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
+
+
 
 
     void LoadMap(){
@@ -112,7 +124,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         mMap.addMarker(new MarkerOptions().position(sydney).title("lastOnlineDate:" + LastDateOnline));
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
+
+
     }
 
         }

@@ -1,7 +1,6 @@
 package com.example.arunathungathurthi.tracker;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
     EditText EditNumber;
-    public static final String PREFS_NAME = "LoginPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

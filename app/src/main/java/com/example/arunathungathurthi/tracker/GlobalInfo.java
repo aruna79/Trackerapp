@@ -65,12 +65,18 @@ public class GlobalInfo {
         editor.putString("MyTrackers",MyTrackersList);
         editor.putString("PhoneNumber",PhoneNumber);
         editor.commit();
+
+
+
     }
 
     void LoadData(){
         MyTrackers.clear();
-        PhoneNumber= ShredRef.getString("PhoneNumber","empty");
-        String MyTrackersList= ShredRef.getString("MyTrackers","empty");
+        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+
+
+      PhoneNumber= ShredRef.getString("PhoneNumber","empty");
+       String MyTrackersList= ShredRef.getString("MyTrackers","empty");
         if (!MyTrackersList.equals("empty")){
             String[] users=MyTrackersList.split("%");
             for (int i=0;i<users.length;i=i+2){
