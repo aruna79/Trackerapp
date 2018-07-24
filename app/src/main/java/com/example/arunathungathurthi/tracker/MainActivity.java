@@ -146,8 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(new String[]{
                                 Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.ACCESS_COARSE_LOCATION,
-
-
+                                Manifest.permission.READ_CONTACTS
                         },
                         REQUEST_CODE_ASK_PERMISSIONS);
                 return ;
