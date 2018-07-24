@@ -15,7 +15,6 @@ tools:context="phonelocation.example.asuss550c.phonelocation.ContactList">
     <item android:id="@+id/addalert"
         android:title="addalert"
 
-
         />
     <item
         android:id="@+id/action_logout"

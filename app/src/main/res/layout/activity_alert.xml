@@ -11,32 +11,30 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:id="@+id/Lat"
-        android:text="slat"
+        android:id="@+id/NLat"
+
         android:layout_weight="1"
         android:textColor="#ff1a102c"
         android:background="@android:drawable/editbox_background"
         android:textSize="20dp"
-        android:hint="Enter Lat"
+        android:hint="Enter NLat"
         android:paddingBottom="9dp"
         android:paddingTop="9dp"
         android:layout_marginBottom="10dp"
         android:inputType="phone" >
 
     </EditText>
-
     <EditText
         android:maxLength="15"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:id="@+id/Lon"
-        android:text="slon"
+        android:id="@+id/WLon"
         android:layout_weight="1"
         android:textColor="#102c1e"
         android:background="@android:drawable/editbox_background"
         android:textSize="20dp"
-        android:hint="Enter Lon"
+        android:hint="Enter WLon"
         android:paddingBottom="9dp"
         android:paddingTop="9dp"
         android:layout_marginBottom="10dp"
@@ -49,35 +47,34 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/SLat"
-        android:text="slat"
         android:layout_weight="1"
         android:textColor="#ff1a102c"
         android:background="@android:drawable/editbox_background"
         android:textSize="20dp"
-        android:hint="Enter Lat"
+        android:hint="Enter SLat"
         android:paddingBottom="9dp"
         android:paddingTop="9dp"
         android:layout_marginBottom="10dp"
-        android:inputType="phone" />
+        android:inputType="phone" >
 
-
+    </EditText>
     <EditText
         android:maxLength="15"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:id="@+id/SLon"
-        android:text="slat"
+        android:id="@+id/ELon"
         android:layout_weight="1"
         android:textColor="#ff1a102c"
         android:background="@android:drawable/editbox_background"
         android:textSize="20dp"
-        android:hint="Enter Lat"
+        android:hint="Enter ELon"
         android:paddingBottom="9dp"
         android:paddingTop="9dp"
         android:layout_marginBottom="10dp"
-        android:inputType="phone" />
+        android:inputType="phone" >
 
+    </EditText>
 
 
     <Button
@@ -86,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="25pt"
         android:text="Set Alert"
-        android:id="@+id/BuNext"
+        android:id="@id/BuNext"
         android:background="@drawable/green_button"
         android:onClick="SetAlert"
         android:layout_marginBottom="10dp"

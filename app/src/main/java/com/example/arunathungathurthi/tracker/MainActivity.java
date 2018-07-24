@@ -120,29 +120,14 @@ public class MainActivity extends AppCompatActivity {
                         if (cs.PhoneNumber.length() > 0) {
                             if (Numbers.contains(cs.PhoneNumber)) {
                                 listnewsData.add(new AdapterItems(cs.UserName, cs.PhoneNumber));
+                                if (GlobalInfo.hasAlertLatLng()) {
+                                    this.alertListener(cs.PhoneNumber);
+                                }
                                 break;
+
                             }
 
                         }
-                        databaseReference.child("Users");
-                        databaseReference.child("Finders");
-                        databaseReference.child("Location")
-                        .addValueEventListener(new ValueEventListener() {
-                                                   @Override
-                                                   public void onDataChange( DataSnapshot dataSnapshot) {
-                                                       LatLng findermyloc;
-                                                       //Display the alert message
-                                                       //loop through the global data
-                                                       //compare the coordinates
-                                                       //Alert message
-
-                                                   }
-
-                                                   @Override
-                                                   public void onCancelled( DatabaseError databaseError) {
-
-                                                   }
-                                               });
 
 
 
@@ -158,6 +143,34 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 // Log.w(TAG, "Failed to read value.", error.toException());
+            }
+
+            private void alertListener(String phoneNumber) {
+                databaseReference.child("Users").child(phoneNumber).
+                        child("Location").addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange( DataSnapshot dataSnapshot) {
+                        double lat = Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
+                        double lon = Double.parseDouble(dataSnapshot.child("lon").getValue().toString());
+
+                        //Display the alert message
+                        //loop through the global data
+                        //compare the coordinates
+                        //Alert message
+                        if ((lat <= GlobalInfo.NLat) && (lat >= GlobalInfo.SLat) &&
+                            (lon >= GlobalInfo.WLon) && (lon <= GlobalInfo.ELon)) {
+                            Toast.makeText(getApplicationContext(),"Destination Reached",Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled( DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
         myadapter.notifyDataSetChanged();
@@ -252,6 +265,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_logout:
                     logout();
                     return true;
+                case R.id.addalert:
+                    Intent intent1 =new Intent(this,Alert.class);
+                    startActivity(intent1);
+
 
                 default:
                     return super.onOptionsItemSelected(item);

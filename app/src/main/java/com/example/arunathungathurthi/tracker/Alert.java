@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class Alert extends AppCompatActivity {
 
-public static EditText Lat,Lon;
+public EditText NLat,WLon,SLat,ELon;
 
     DatabaseReference databaseReference;
 
@@ -25,17 +25,35 @@ public static EditText Lat,Lon;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert);
-       Lat  = (EditText) findViewById(R.id.Lat);
-       Lon = (EditText) findViewById(R.id.Lon);
+
+        this.NLat  = (EditText) findViewById(R.id.NLat);
+        this.WLon = (EditText) findViewById(R.id.WLon);
+        this.SLat  = (EditText) findViewById(R.id.SLat);
+        this.ELon  = (EditText) findViewById(R.id.ELon);
 
     }
 
     public void SetAlert(View view) {
 
-     DatabaseReference Database = FirebaseDatabase.getInstance().getReference();
-      Database.child("Users").child(GlobalInfo.PhoneNumber).child("Finders").child("Alert").child("Slat").setValue(Lat.getText().toString());
-       Database.child("Users").child(GlobalInfo.PhoneNumber).child("Finders").child("Alert").child("Slon").setValue(Lon.getText().toString());
+        double NLat = Double.parseDouble(this.NLat.getText().toString());
+        double SLat = Double.parseDouble(this.SLat.getText().toString());
+        double WLon = Double.parseDouble(this.WLon.getText().toString());
+        double ELon = Double.parseDouble(this.ELon.getText().toString());
+
+
+
+        DatabaseReference Database = FirebaseDatabase.getInstance().getReference();
+      Database.child("Users").child(GlobalInfo.PhoneNumber).child("Alert").child("NLat").setValue(NLat);
+       Database.child("Users").child(GlobalInfo.PhoneNumber).child("Alert").child("SLat").setValue(SLat);
+        Database.child("Users").child(GlobalInfo.PhoneNumber).child("Alert").child("WLon").setValue(WLon);
+        Database.child("Users").child(GlobalInfo.PhoneNumber).child("Alert").child("ELon").setValue(ELon);
+
+
         GlobalInfo globalInfo = new GlobalInfo(this);
+        GlobalInfo.NLat =NLat;
+        GlobalInfo.SLat = SLat;
+        GlobalInfo.WLon = WLon;
+        GlobalInfo.ELon= ELon;
 
         finish();
 

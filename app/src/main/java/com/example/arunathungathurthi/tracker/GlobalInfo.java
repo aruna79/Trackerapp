@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,6 +18,7 @@ import java.util.Map;
 
 public class GlobalInfo {
     public  static String PhoneNumber="";
+    public static double NLat,SLat,WLon,ELon;
     public  static Map<String,String> MyTrackers=new HashMap<>();
 
     public  static  void UpdatesInfo(String UserPhone){
@@ -105,5 +107,11 @@ public class GlobalInfo {
         }
     }
 
+    public static boolean hasAlertLatLng() {
+        return  NLat != 0.0d &&
+                SLat != 0.0d &&
+                WLon != 0.0d &&
+                ELon != 0.0d;
+    }
 
 }
