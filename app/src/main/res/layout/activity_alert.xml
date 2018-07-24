@@ -24,6 +24,7 @@
         android:inputType="phone" >
 
     </EditText>
+
     <EditText
         android:maxLength="15"
         android:layout_width="fill_parent"
@@ -42,6 +43,41 @@
         android:inputType="phone" >
 
     </EditText>
+    <EditText
+        android:maxLength="15"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/SLat"
+        android:text="slat"
+        android:layout_weight="1"
+        android:textColor="#ff1a102c"
+        android:background="@android:drawable/editbox_background"
+        android:textSize="20dp"
+        android:hint="Enter Lat"
+        android:paddingBottom="9dp"
+        android:paddingTop="9dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="phone" />
+
+
+    <EditText
+        android:maxLength="15"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/SLon"
+        android:text="slat"
+        android:layout_weight="1"
+        android:textColor="#ff1a102c"
+        android:background="@android:drawable/editbox_background"
+        android:textSize="20dp"
+        android:hint="Enter Lat"
+        android:paddingBottom="9dp"
+        android:paddingTop="9dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="phone" />
+
 
 
     <Button

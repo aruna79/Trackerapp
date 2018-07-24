@@ -9,10 +9,10 @@ import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,13 +60,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
                 AdapterItems adapterItems=listnewsData.get(position);
                 GlobalInfo.UpdatesInfo(adapterItems.PhoneNumber);
                 Intent intent= new Intent(getApplicationContext(),MapsActivity.class);
                 intent.putExtra("PhoneNumber",adapterItems.PhoneNumber);
                 startActivity(intent);
-
             }
         });
 
@@ -125,6 +124,30 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         }
+                        databaseReference.child("Users");
+                        databaseReference.child("Finders");
+                        databaseReference.child("Location")
+                        .addValueEventListener(new ValueEventListener() {
+                                                   @Override
+                                                   public void onDataChange( DataSnapshot dataSnapshot) {
+                                                       LatLng findermyloc;
+                                                       //Display the alert message
+                                                       //loop through the global data
+                                                       //compare the coordinates
+                                                       //Alert message
+
+                                                   }
+
+                                                   @Override
+                                                   public void onCancelled( DatabaseError databaseError) {
+
+                                                   }
+                                               });
+
+
+
+
+
 
                     }
                     myadapter.notifyDataSetChanged();
@@ -147,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
                                 Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.ACCESS_COARSE_LOCATION,
                                 Manifest.permission.READ_CONTACTS
+
+
                         },
                         REQUEST_CODE_ASK_PERMISSIONS);
                 return ;
@@ -227,10 +252,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_logout:
                     logout();
                     return true;
-                case R.id.addalert:
-                    Intent intent1 =new Intent(this,Alert.class);
-                    startActivity(intent1);
-
 
                 default:
                     return super.onOptionsItemSelected(item);
