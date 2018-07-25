@@ -39,7 +39,7 @@
 
                 <TextView
                     android:background="@drawable/backgroundwhite"
-                    android:text="PhoneNumber"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView3"
@@ -55,7 +55,7 @@
                     android:textColor="#ff1a102c"
                     android:background="@android:drawable/editbox_background"
                     android:textSize="20dp"
-                    android:hint="PhoneNumberhint"
+                    android:hint="Enter Phone Number"
                     android:paddingBottom="9dp"
                     android:paddingTop="9dp"
                     android:layout_marginBottom="10dp"

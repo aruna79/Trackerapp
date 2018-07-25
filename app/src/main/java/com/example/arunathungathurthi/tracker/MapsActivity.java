@@ -67,7 +67,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 LastDateOnline= td.get("lastOnlineDate").toString();
 
-
                 LoadMap();
                 LoadAlert();
 

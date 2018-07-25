@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.ContactsContract;
@@ -24,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.Fragment;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -130,10 +132,6 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-
-
-
-
                     }
                     myadapter.notifyDataSetChanged();
                 }
@@ -151,8 +149,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onDataChange( DataSnapshot dataSnapshot) {
-                        double lat = Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
-                        double lon = Double.parseDouble(dataSnapshot.child("lon").getValue().toString());
+                        Object  latObj = dataSnapshot.child("lat").getValue();
+                        Object lonObj=dataSnapshot.child("lon").getValue();
+                        if (latObj==null||lonObj==null) {
+                            return;
+                        }
+                            double lat = Double.parseDouble(latObj.toString());
+                            double lon = Double.parseDouble(lonObj.toString());
 
                         //Display the alert message
                         //loop through the global data
@@ -162,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                             (lon >= GlobalInfo.WLon) && (lon <= GlobalInfo.ELon)) {
                             Toast.makeText(getApplicationContext(),"Destination Reached",Toast.LENGTH_LONG).show();
                         }
+
+
 
 
                     }

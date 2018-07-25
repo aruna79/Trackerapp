@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Alert">
 
     <EditText
@@ -12,7 +13,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/NLat"
-
         android:layout_weight="1"
         android:textColor="#ff1a102c"
         android:background="@android:drawable/editbox_background"
@@ -24,6 +24,8 @@
         android:inputType="phone" >
 
     </EditText>
+
+
     <EditText
         android:maxLength="15"
         android:layout_width="fill_parent"
@@ -38,9 +40,9 @@
         android:paddingBottom="9dp"
         android:paddingTop="9dp"
         android:layout_marginBottom="10dp"
-        android:inputType="phone" >
+        android:inputType="phone" />
 
-    </EditText>
+
     <EditText
         android:maxLength="15"
         android:layout_width="fill_parent"
@@ -52,12 +54,10 @@
         android:background="@android:drawable/editbox_background"
         android:textSize="20dp"
         android:hint="Enter SLat"
-        android:paddingBottom="9dp"
-        android:paddingTop="9dp"
-        android:layout_marginBottom="10dp"
-        android:inputType="phone" >
 
-    </EditText>
+        android:inputType="phone" />
+
+
     <EditText
         android:maxLength="15"
         android:layout_width="fill_parent"
@@ -69,19 +69,17 @@
         android:background="@android:drawable/editbox_background"
         android:textSize="20dp"
         android:hint="Enter ELon"
-        android:paddingBottom="9dp"
-        android:paddingTop="9dp"
-        android:layout_marginBottom="10dp"
-        android:inputType="phone" >
 
-    </EditText>
+        android:inputType="phone" />
+
+
 
 
     <Button
 
         android:layout_margin="15dp"
         android:layout_width="match_parent"
-        android:layout_height="25pt"
+        android:layout_height="15pt"
         android:text="Set Alert"
         android:id="@id/BuNext"
         android:background="@drawable/green_button"
